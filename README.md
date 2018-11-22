@@ -1,4 +1,6 @@
-# LGallery is small pure JavaScript solution for interactive galleries & sliders
+# LGallery
+
+Small pure JavaScript solution for interactive galleries & sliders.
 
 Touch enabled, responsive and customizable.
 
