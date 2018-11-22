@@ -1,7 +1,7 @@
 {
-  "name": "gulpstudy",
+  "name": "LGallery",
   "version": "1.0.0",
-  "description": "My First Gulp Experience",
+  "description": "pure js gallery",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
