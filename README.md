@@ -1,0 +1,2 @@
+# LGallery
+Pure JavaScript gallery
