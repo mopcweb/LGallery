@@ -10,9 +10,8 @@ See the [project page]() for documentation and a demonstration.
 
 1\.  Download and add only 2 files:
 
-<link rel="stylesheet" href="/path/to/lgallery.min.css">
-
-<script src="/path/to/lgallery.min.js"></script>
+\<link rel="stylesheet" href="/path/to/lgallery.min.css">
+\<script src="/path/to/lgallery.min.js"></script>
 
 2\.  Initialize
 
