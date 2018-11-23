@@ -4,7 +4,7 @@ Small pure JavaScript solution for interactive galleries & sliders.
 
 Touch enabled, responsive and customizable.
 
-See the [project page]() for documentation and a demonstration.
+See the [Demo](https://mopcweb.github.io/) for documentation and a demonstration.
 
 ## Quick start
 
