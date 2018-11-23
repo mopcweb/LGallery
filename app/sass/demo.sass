@@ -1,0 +1,623 @@
+$white: #fcfaf9
+$darkOpacity: #0E0E0E80
+$dark: #0E0E0E
+$main: #f5d796
+$mainOpacity80: #f5d79680
+$mainOpacity66: #f5d79666
+
+body, html
+  width: 100%
+  height: 100%
+  margin: 0
+  padding: 0
+  background-color: #d8e0e9
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif
+  font-size: 16px
+  line-height: 20px
+  color: $dark
+
+  *
+    box-sizing: border-box !important
+
+body
+  overflow-x: hidden
+
+  @media screen and (max-width: 768px)
+    font-size: 0.9rem
+
+h2
+  width: 100%
+  margin: 0 auto 80px
+  padding: 0
+  font-weight: 500
+  font-size: 1.8rem
+  text-align: center
+
+.Wrapper
+  margin: 0 auto
+  padding: 0 5px
+  width: 1170px
+  max-width: 100%
+  overflow: hidden
+
+  &_flex
+    display: flex
+    flex-wrap: wrap
+    justify-content: space-around
+    align-items: center
+    align-content: center
+
+  &_flex_center
+    display: flex
+    flex-wrap: wrap
+    justify-content: center
+    align-items: center
+    align-content: center
+
+  h3
+    margin: 30px auto
+    width: 80%
+    font-weight: 500
+    font-size: 1.3rem
+
+    @media screen and (max-width: 768px)
+      width: 100%
+
+    &:first-of-type
+      margin-top: 0
+
+  pre
+    display: block
+    width: 80%
+    margin: 10px auto
+    padding: 20px 10px 0px
+    background-color: $main
+    overflow: hidden
+
+    @media screen and (max-width: 550px)
+      width: 100%
+
+    @media screen and (max-width: 425px)
+      font-size: 0.8rem
+
+  .Descr
+    width: 80%
+
+    @media screen and (max-width: 768px)
+      width: 100%
+
+    code
+      display: block
+      margin: 10px auto
+      padding: 20px 10px
+      background-color: $main
+
+      @media screen and (max-width: 425px)
+        font-size: 0.8rem
+
+    span
+      font-weight: 600
+      color: $main
+      text-shadow: 1px 1px 4px $dark
+
+  .Options
+    width: 80%
+    border-collapse: collapse
+
+    @media screen and (max-width: 768px)
+      width: 100%
+
+    @media screen and (max-width: 432px)
+      font-size: 0.7rem
+
+    @media screen and (max-width: 350px)
+      font-size: 0.55rem
+
+    thead
+      background-color: $main
+
+    tbody
+      // background-color: $mainOpacity66
+
+    th,td
+      width: 100px
+      border: 1px solid $dark
+      padding: 5px
+      text-align: center
+      vertical-align: middle
+
+      &:nth-of-type(2n + 1)
+        background-color: $mainOpacity66
+
+      &:last-of-type
+        width: 40%
+
+/******************************** PRELOAD ********************************/
+
+#preload
+  position: fixed
+  top: 0
+  bottom: 0
+  left: 0
+  right: 0
+  overflow: hidden
+  background-color: $dark
+  transition: all 0.5s
+  z-index: 999999
+
+  svg
+    position: absolute
+    top: calc(50% - 32px)
+    left: calc(50% - 32px)
+
+/******************************** HEADER ********************************/
+
+.Header
+  position: fixed
+  top: 0
+  left: 0
+  display: flex
+  justify-content: center
+  align-items: center
+  align-content: center
+  padding: 10px 0
+  width: 100%
+  text-align: center
+  background-color:	$main
+  z-index: 14
+
+  @media screen and (max-width: 650px)
+    height: 45px
+
+.OpenNav
+  position: absolute
+  top: 10px
+  left: 15px
+  display: none
+  width: 30px
+  height: 24px
+  background-clip: content-box
+  border-top: 11px solid transparent
+  border-bottom: 11px solid transparent
+  background-color: $dark
+  transition: all 0.5s
+  z-index: 111
+
+  &::after, &::before
+    position: absolute
+    left: 0
+    display: block
+    width: 30px
+    height: 2px
+    content: ""
+    background-color: $dark
+    transition: all 0.5s
+
+  &::before
+    top: -10px
+
+  &::after
+    top: 10px
+
+  @media screen and (max-width: 650px)
+    display: block
+
+  &_open
+    background-color: transparent
+
+    &::before
+      top: 0
+      transform: rotate(45deg)
+
+    &::after
+      top: 0
+      transform: rotate(-45deg)
+
+.Navbar
+  display: flex
+  justify-content: space-between
+  align-items: center
+  align-content: center
+  padding: 0 10px
+  width: 100%
+  height: 100%
+
+  @media screen and (max-width: 650px)
+    position: fixed
+    top: 0
+    left: 0
+    bottom: 0
+    right: 0
+    flex-wrap: wrap
+    background-color:	$main
+    transform: translateY(-100%)
+    opacity: 0
+    transition: all 0.5s
+    z-index: 100
+
+
+  &_open
+    opacity: 1
+    transform: translateY(0)
+
+  a
+    display: block
+    padding: 5px 5px
+    text-decoration: none
+    color: $dark
+
+  &-List
+    display: flex
+    justify-content: center
+    align-items: center
+    align-content: center
+    margin: 0
+    padding: 0
+    list-style: none
+    font-size: 0
+
+    @media screen and (max-width: 650px)
+      flex-wrap: wrap
+      width: 100%
+      margin: 30px auto
+
+  &-Link
+    display: inline-block
+    padding: 0 5px
+    font-size: 1rem
+
+    @media screen and (max-width: 650px)
+      width: 100%
+      margin: 5px auto
+
+    a
+      color: $white
+      text-shadow: 1px 1px 1px $darkOpacity
+      font-weight: 600
+      border-bottom: 2px solid transparent
+      transition: all 0.25s
+
+      @media screen and (max-width: 650px)
+        padding: 10px
+        font-size: 1.2rem
+
+      &:hover
+        color: $darkOpacity
+        text-shadow: 1px 1px 1px $white
+        border-color: $darkOpacity
+
+        @media screen and (max-width: 650px)
+          border-color: transparent
+
+  &-Social
+
+    @media screen and (max-width: 650px)
+      width: 100%
+      margin: 30px auto
+
+    a
+      width: 35px
+      height: 35px
+      border: 1px solid transparent
+      border-radius: 50%
+      text-align: center
+      line-height: 35px
+      padding: 5px
+      transition: all 0.2s
+
+      @media screen and (max-width: 650px)
+        width: 60px
+        height: 60px
+        margin: 0 auto
+
+      &:hover
+        // border-color: $dark
+        background-color: $darkOpacity
+        svg
+          fill: $white
+
+/******************************** QUICK START ********************************/
+
+.QuickStart
+  display: flex
+  align-items: center
+  justify-content: center
+  padding: 135px 0 0
+  height: auto
+
+  h1
+    margin: 0 auto 50px
+    padding: 0
+    font-size: 3.1rem
+    line-height: 55px
+    font-weight: 450
+    text-align: center
+    color: $main
+    text-shadow: 1px 1px 4px $darkOpacity
+
+    span
+      display: block
+      font-size: 0.5em
+
+  &-About
+    margin: 50px auto 0
+    width: 590px
+    max-width: 100%
+    overflow: auto
+
+    @media screen and (max-width: 560px)
+      width: 420px
+      font-size: 0.7rem
+
+    @media screen and (max-width: 425px)
+      width: 360px
+
+    pre
+      width: 100%
+      background: none
+
+      @media screen and (max-width: 425px)
+        padding: 20px 0 0
+        font-size: 0.6rem
+
+      @media screen and (max-width: 360px)
+        font-size: 0.53rem
+
+/******************************** FEATURES ********************************/
+
+.Features
+  padding: 80px 0 0
+
+  .Feature
+    display: flex
+    justify-content: space-between
+    align-items: center
+    margin: 10px
+    width: 400px
+    max-width: 100%
+    vertical-align: middle
+
+    &-Img
+      display: flex
+      justify-content: center
+      align-items: center
+      width: 100px
+      height: 100px
+      border-radius: 50%
+      border: 1px solid $dark
+      background-color: $main
+
+      @media screen and (max-width: 425px)
+        margin-right: 15px
+        width: 90px
+        height: 90px
+
+      img
+        width: 65px
+        height: 65px
+
+        @media screen and (max-width: 425px)
+          width: 50px
+          height: 50px
+
+    &-Text
+      width: 280px
+
+      @media screen and (max-width: 425px)
+        width: 200px
+        flex-grow: 1
+
+    &-Name
+      margin: 5px 0 8px
+      font-weight: 400
+      font-size: 1.4rem
+
+    &-Descr
+      margin: 5px 0
+      line-height: 1.3rem
+      font-size: 0.9rem
+
+    @media screen and (max-width: 425px)
+      max-width: 100%
+
+
+/******************************** LGALLERY ********************************/
+
+.Lgallery
+  padding: 80px 0 0
+
+.TemplateLgallery
+  position: relative
+  width: 300px
+  height: auto
+  margin: 0 20px 30px
+
+  &-Item
+    width: 100%
+    height: 200px
+    box-shadow: 1px 1px 4px rgba(0,0,0,0.4)
+    overflow-y: hidden
+    cursor: pointer
+
+    img
+      display: block
+      width: 100%
+      height: 100%
+      object-fit: cover
+
+  @media screen and (min-width: 1024px)
+    transition: all 0.5s
+
+    &:hover
+      transform: scale(0.8) rotate3d(-1, 1, 0, -20deg)
+      box-shadow: -10px -10px 2px 0.3px rgba(0,0,0,0.6), -20px -20px 3px 0.3px rgba(0,0,0,0.3), -30px -30px 4px 0.3px rgba(0,0,0,0.1)
+
+/******************************** LGPARENT ********************************/
+
+.Lgparent
+  padding: 80px 0 0
+
+.TemplateParent
+  display: flex
+  flex-wrap: wrap
+  justify-content: center
+  align-items: flex-start
+  align-content: flex-start
+  width: 100%
+
+.TemplateParent
+  &-Item
+    position: relative
+    width: 150px
+    height: 150px
+    margin: 0 10px 20px
+
+    img:not(.LGallerySlider-Slide)
+      width: 100%
+      height: 100%
+      opacity: 0.8
+      transition: all 0.5s
+
+    span
+      position: absolute
+      bottom: 0
+      left: 0
+      padding: 1px 0
+      display: block
+      width: 100%
+      height: 20px
+      line-height: 20px
+      text-align: center
+      color: $white
+      background-color: $darkOpacity
+      transition: all 0.5s
+
+    @media screen and (min-width: 1024px)
+      &:hover
+        img:not(.LGallerySlider-Slide)
+          opacity: 1
+          transform: scale(0.8) rotate3d(-1, 1, 0, -20deg)
+          box-shadow: -10px -10px 2px 0.3px rgba(0,0,0,0.6), -20px -20px 3px 0.3px rgba(0,0,0,0.3), -30px -30px 4px 0.3px rgba(0,0,0,0.1)
+
+        span
+          height: 75px
+          line-height: 75px
+          opacity: 0
+          z-index: -1
+/******************************** LGSLIDER ********************************/
+
+.Lgslider
+  padding: 80px 0 0
+
+.TemplateSlider
+  margin: 0 auto
+  margin: 0 auto
+  width: 1020px
+  max-width: 100%
+  height: 550px
+  max-height: 70%
+
+/******************************** LGPREVIEW ********************************/
+
+.Lgpreview
+  padding: 80px 0 0
+
+.TemplatePreview
+  width: 1020px
+  max-width: 100%
+  height: 550px
+  margin: 0 auto
+
+/******************************** LGCARUSEL ********************************/
+
+.Lgcarusel
+  padding: 80px 0 0
+
+.TemplateCarusel
+  width: 100%
+  max-width: 100%
+  height: 400px
+  max-height: 100%
+  text-align: center
+  overflow: hidden
+
+  .LGCarusel-Slide
+    picture
+      img
+        height: 100%
+        width: 100%
+        object-fit: cover
+
+/******************************** LGCARUSEL - RANDOM HTML ********************************/
+
+.CardOfGoofs
+  padding: 10px 50px
+  width: 980px
+  max-width: 100%
+  height: 320px
+
+  // @media screen and (max-width: 768px)
+
+  .LGCarusel
+    overflow: visible !important
+
+    &-Slider
+      overflow: visible !important
+
+      @media screen and (max-width: 768px)
+        // overflow: hidden !important
+
+    svg
+      fill: #000 !important
+
+    .LGCarusel-Button_next
+      right: -45px !important
+
+    .LGCarusel-Button_prev
+      left: -45px !important
+
+  .newGood
+    position: relative
+    padding: 0 10px
+    width: 250px
+    height: 300px
+    border-radius: 10px
+    color: #211b29
+    background-color: $mainOpacity80
+    box-shadow: 1px 1px 4px #000
+
+    img
+      margin: 20px auto
+      width: 60%
+      border-radius: 10px
+      box-shadow: 1px 1px 4px rgba(0,0,0,0.4)
+
+    h3
+      margin: 10px auto
+
+    button
+      position: absolute
+      bottom: 20px
+      left: calc(50% - 100px / 2)
+      padding: 5px 0px
+      border: 1px solid #000
+      border-radius: 10px
+      width: 100px
+      font-weight: bold
+      color: #fff
+      background-color: #83192d
+      cursor: pointer
+
+      &:hover
+        background-color: #451930
+
+/******************************** METHODS & THANKS ********************************/
+
+.Methods, .Thanks
+  padding: 80px 0 0
+
+.Thanks
+  margin-top: 80px
+  padding-bottom: 0
+  padding: 40px 0
+  background-color: $mainOpacity80
