@@ -22,7 +22,7 @@ The easiest way to initialize LGallery is to put in:
   initLG()
 </script>
 
-There are also other ways to make it with more options. Read more
+There are also other ways to make it with more options. [Read more](https://mopcweb.github.io/#methods)
 
 3\. That's all. Enjoy!
 
