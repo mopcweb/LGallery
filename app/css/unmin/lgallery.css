@@ -126,6 +126,8 @@
 .LGallery-Counter {
   right: auto;
   left: 10px;
+  justify-content: flex-start !important;
+  width: 70px !important;
   font-family: sans-serif;
   font-weight: lighter;
   color: #fff;
