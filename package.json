@@ -1,32 +1,46 @@
 {
-  "name": "LGallery",
+  "name": "lgallery",
   "version": "1.0.0",
   "description": "pure js gallery",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Danil",
-  "license": "ISC",
+  "author": "Daniil Moroz",
+  "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.1.2",
     "@babel/preset-env": "^7.1.0",
+    "autoprefixer": "^9.4.0",
     "browser-sync": "^2.26.3",
+    "cssnano": "^4.1.7",
     "del": "^3.0.0",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.0",
     "gulp-autoprefixer": "^6.0.0",
     "gulp-babel": "^8.0.0-beta.2",
-    "gulp-cache": "^1.0.2",
     "gulp-concat": "^2.6.1",
     "gulp-cssnano": "^2.1.3",
-    "gulp-imagemin": "^4.1.0",
+    "gulp-notify": "^3.2.0",
+    "gulp-plumber": "^1.2.1",
+    "gulp-postcss": "^8.0.0",
     "gulp-rename": "^1.4.0",
     "gulp-sass": "^4.0.2",
-    "gulp-uglifyjs": "^0.6.2",
-    "imagemin-pngquant": "^6.0.0"
+    "gulp-uglifyjs": "^0.6.2"
   },
-  "dependencies": {
-    "lodash": "^4.17.11",
-    "minimatch": "^3.0.4"
-  }
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mopcweb/LGallery.git"
+  },
+  "keywords": [
+    "vanilla",
+    "js",
+    "slider",
+    "gallery",
+    "image"
+  ],
+  "bugs": {
+    "url": "https://github.com/mopcweb/LGallery/issues"
+  },
+  "homepage": "https://github.com/mopcweb/LGallery#readme"
 }

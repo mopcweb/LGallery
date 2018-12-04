@@ -9,14 +9,14 @@
     if (LGallery.prototype._count < 2) {
       // Устанавливаем обязательные мета-теги, при их отсутствии
       if (!document.head.querySelector('[width="device-width, initial-scale=1"]')) {
-        let viewport = document.createElement('meta')
+        let viewport = document.createElement('meta');
         viewport.name = 'viewport';
         viewport.content = 'width=device-width, initial-scale=1';
         document.head.appendChild(viewport);
       };
 
       if (!document.head.querySelector('[name="HandheldFriendly"]')) {
-        let handheld = document.createElement('meta')
+        let handheld = document.createElement('meta');
         handheld.name = 'HandheldFriendly';
         handheld.content = 'True';
         document.head.appendChild(handheld);
