@@ -1,6 +1,6 @@
 # LGallery
 
-See the [Demo](https://mopcweb.github.io/) for documentation and a demonstration.
+See the [Demo](https://mopcweb.github.io/LGallery/) for documentation and a demonstration.
 
 Small pure JavaScript solution for interactive galleries & sliders.
 
