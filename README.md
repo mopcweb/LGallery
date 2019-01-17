@@ -25,7 +25,7 @@ The easiest way to initialize LGallery is to put in:
 </script>
 ```
 
-There are also other ways to make it with more options. [Read more](https://mopcweb.github.io/#methods)
+There are also other ways to make it with more options. [Read more](https://mopcweb.github.io/LGallery/#methods)
 
 3\. That's all. Enjoy!
 
