@@ -1,5 +1,3 @@
-"use strict";
-
 ;
 
 (function () {
@@ -12,7 +10,7 @@
     if (LGallery.prototype._count < 2) {
       // Устанавливаем обязательные мета-теги, при их отсутствии
       if (!document.head.querySelector('[width="device-width, initial-scale=1"]')) {
-        var viewport = document.createElement('meta');
+        let viewport = document.createElement('meta');
         viewport.name = 'viewport';
         viewport.content = 'width=device-width, initial-scale=1';
         document.head.appendChild(viewport);
@@ -21,7 +19,7 @@
       ;
 
       if (!document.head.querySelector('[name="HandheldFriendly"]')) {
-        var handheld = document.createElement('meta');
+        let handheld = document.createElement('meta');
         handheld.name = 'HandheldFriendly';
         handheld.content = 'True';
         document.head.appendChild(handheld);
@@ -30,7 +28,7 @@
       ; // Подключаем стили при их отсутствии
 
       if (!document.head.querySelector('[href="lgallery.min.css"]')) {
-        var css = document.createElement('link');
+        let css = document.createElement('link');
         css.rel = 'stylesheet';
         css.href = 'css/lgallery.min.css';
         document.head.appendChild(css);
@@ -417,7 +415,7 @@
     // Действия для data-lgallery
     if (this._type == 'lgallery') {
       // Создаем кнопку открытия галереи
-      var OpenBtn = document.createElement('span');
+      let OpenBtn = document.createElement('span');
       OpenBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M304 192v32c0 6.6-5.4 12-12 12h-56v56c0 6.6-5.4 12-12 12h-32c-6.6 0-12-5.4-12-12v-56h-56c-6.6 0-12-5.4-12-12v-32c0-6.6 5.4-12 12-12h56v-56c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v56h56c6.6 0 12 5.4 12 12zm201 284.7L476.7 505c-9.4 9.4-24.6 9.4-33.9 0L343 405.3c-4.5-4.5-7-10.6-7-17V372c-35.3 27.6-79.7 44-128 44C93.1 416 0 322.9 0 208S93.1 0 208 0s208 93.1 208 208c0 48.3-16.4 92.7-44 128h16.3c6.4 0 12.5 2.5 17 7l99.7 99.7c9.3 9.4 9.3 24.6 0 34zM344 208c0-75.2-60.8-136-136-136S72 132.8 72 208s60.8 136 136 136 136-60.8 136-136z"/></svg>';
       OpenBtn.className = 'LGallery-OpenBtn'; // вставляем в документ кнопку открытия галереи
 
@@ -443,7 +441,7 @@
     ; // Действия для data-lgparent
 
     if (this._type == 'lgparent') {
-      for (var i = 0; i < this._src.length; i++) {
+      for (let i = 0; i < this._src.length; i++) {
         // Ставим обработчик для открытия галереи при клике на картинке-ссылке
         this._src[i].addEventListener('click', this._initGallery.bind(this));
 
@@ -476,8 +474,6 @@
 
 
   LGallery.prototype._initGallery = function (e) {
-    var _this = this;
-
     // Т.к. обработчик у нас висит на всем родителе, а галерея является его ребенком, отсеиваем лишние клики при открытой галерее
     if (this._type != 'lgslider' && this._type != 'lgpreview') {
       if (e.target.closest('.LGallery')) return;
@@ -550,9 +546,9 @@
     ;
     if (this._type == 'lgpreview') this._renderPreviewBlock.call(this); // Проверяем родителя на наличие лишних галерей (например, при одновременном вызове функций findLG и createLG. Так лучше не делать, что и описано в документации, но на всякий случай добавим проверку)
 
-    var oldGalleries = this._parent.querySelectorAll('.LGallery');
+    let oldGalleries = this._parent.querySelectorAll('.LGallery');
 
-    var i = oldGalleries.length;
+    let i = oldGalleries.length;
 
     while (i > 1) {
       this._parent.removeChild(this._parent.lastElementChild.previousElementSibling);
@@ -562,17 +558,17 @@
 
     ; // Для того, что бы была анимация появления галереи ставим в очередь изменение класса после ее рендера
 
-    setTimeout(function () {
+    setTimeout(() => {
       // Открываем галерею и убираем прокрутку документа во время открытой галереи. Кроме lgslider & lgpreview
-      if (_this._type != 'lgslider' && _this._type != 'lgpreview') {
-        _this._Gallery.classList.add('LGallery_open');
+      if (this._type != 'lgslider' && this._type != 'lgpreview') {
+        this._Gallery.classList.add('LGallery_open');
 
         document.body.classList.add('LGalleryBody_hidden');
       }
 
       ; // Запускаем рендер слайдера
 
-      _this._renderSlider.call(_this);
+      this._renderSlider.call(this);
     }, this._hover ? this._hover : 0);
   }; // Создаем HTML структуру LGallery
 
@@ -691,12 +687,12 @@
     this._SliderInner.classList.add('LGallerySlider-Inner'); // Наполняем слайдер картинками
 
 
-    for (var i = 0; i < this._src.length; i++) {
+    for (let i = 0; i < this._src.length; i++) {
       // Если пустое значение или undefined - пропускаем слайд
       if (this._src[i] == undefined || this._src[i] == '') continue; // Создаем элемент - слайд
 
-      var picture = document.createElement('picture');
-      var SliderSlide = document.createElement('img');
+      let picture = document.createElement('picture');
+      let SliderSlide = document.createElement('img');
       SliderSlide.classList.add('LGallerySlider-Slide'); // При data-lgallery устанавливаем следующие параметры
 
       if (this._type == 'lgallery') {
@@ -726,7 +722,7 @@
       ; // Картинки для мобильных и планшетов
 
       if (this._mobilesrc) {
-        var source = document.createElement('source');
+        let source = document.createElement('source');
         source.media = '(max-width: ' + this._mobilesrc[0] + ')';
         source.srcset = this._mobilesrc[i + 1];
         picture.appendChild(source);
@@ -735,11 +731,10 @@
       ;
 
       if (this._tabletsrc) {
-        var _source = document.createElement('source');
-
-        _source.media = '(max-width: ' + this._tabletsrc[0] + ')';
-        _source.srcset = this._tabletsrc[i + 1];
-        picture.appendChild(_source);
+        let source = document.createElement('source');
+        source.media = '(max-width: ' + this._tabletsrc[0] + ')';
+        source.srcset = this._tabletsrc[i + 1];
+        picture.appendChild(source);
       }
 
       ; // Alt
@@ -758,7 +753,7 @@
       }; // Проверка на наличие значений в атрибуте style, чтобы не потерять их при перезаписи
 
 
-      var hasStyle = SliderSlide.getAttribute('style'); // Кастомные опции объекта
+      let hasStyle = SliderSlide.getAttribute('style'); // Кастомные опции объекта
       // Только для lgallery и lgparent
 
       if (this._width) {
@@ -893,8 +888,8 @@
 
     this._LGThumbsContainer.classList.add('LGSliderWithPreview-ThumbsContainer');
 
-    for (var i = 0; i < this._src.length; i++) {
-      var thumb = document.createElement('img');
+    for (let i = 0; i < this._src.length; i++) {
+      let thumb = document.createElement('img');
       thumb.classList.add('LGSliderWithPreview-Thumb');
       thumb.src = this._src[i];
 
@@ -943,16 +938,14 @@
 
 
   LGallery.prototype._renderSlider = function () {
-    var _this2 = this;
-
     // Массив слайдов
-    var slides = this._Slider.querySelectorAll('.LGallerySlider-Slide'); // Массив labels
+    let slides = this._Slider.querySelectorAll('.LGallerySlider-Slide'); // Массив labels
 
 
-    var labels = this._Slider.querySelectorAll('.LGallerySlider-Label'); // Переменные и функционал ТОЛЬКО для lgpreview
+    let labels = this._Slider.querySelectorAll('.LGallerySlider-Label'); // Переменные и функционал ТОЛЬКО для lgpreview
 
 
-    var thumbs, thumbCoords, thumbWidth, centerOfThumbs, distance, thumbsContWidth, client, thumbMargin;
+    let thumbs, thumbCoords, thumbWidth, centerOfThumbs, distance, thumbsContWidth, client, thumbMargin;
 
     if (this._type == 'lgpreview') {
       client = document.body.clientWidth; // Массив миниатюр
@@ -970,7 +963,7 @@
       thumbsContWidth = 450;
 
       if (this._thumbcontainer) {
-        var value = this._thumbcontainer.slice(-1);
+        let value = this._thumbcontainer.slice(-1);
 
         switch (value) {
           case 'x':
@@ -988,82 +981,82 @@
       if (thumbsContWidth > this._parent.clientWidth) thumbsContWidth = this._parent.clientWidth;
       this._LGThumbs.style.width = thumbsContWidth + 'px'; // Адаптив
 
-      var adaptPreview = function adaptPreview() {
-        var thumbsHeight;
+      let adaptPreview = () => {
+        let thumbsHeight;
 
         if (document.body.clientWidth > 1023) {
           thumbsContWidth = 450;
 
-          if (_this2._thumbcontainer) {
-            var _value = _this2._thumbcontainer.slice(-1);
+          if (this._thumbcontainer) {
+            let value = this._thumbcontainer.slice(-1);
 
-            switch (_value) {
+            switch (value) {
               case 'x':
-                thumbsContWidth = +parseInt(_this2._thumbcontainer);
+                thumbsContWidth = +parseInt(this._thumbcontainer);
                 break;
 
               case '%':
-                thumbsContWidth = _this2._parent.clientWidth * parseInt(_this2._thumbcontainer) / 100;
+                thumbsContWidth = this._parent.clientWidth * parseInt(this._thumbcontainer) / 100;
                 break;
             }
           }
 
           ; // Если больше родителя = ширине родителя
 
-          if (thumbsContWidth > _this2._parent.clientWidth) thumbsContWidth = _this2._parent.clientWidth;
+          if (thumbsContWidth > this._parent.clientWidth) thumbsContWidth = this._parent.clientWidth;
           thumbWidth = 50;
-          if (_this2._thumbwidth) thumbWidth = +parseInt(_this2._thumbwidth);
+          if (this._thumbwidth) thumbWidth = +parseInt(this._thumbwidth);
 
-          for (var i = 0; i < thumbs.length; i++) {
+          for (let i = 0; i < thumbs.length; i++) {
             thumbs[i].style.width = thumbWidth + 'px';
           }
 
           ;
 
-          _this2._Slider.setAttribute('style', 'height: calc(100% - ' + _this2._margin + ' - 50px) !important');
+          this._Slider.setAttribute('style', 'height: calc(100% - ' + this._margin + ' - 50px) !important');
 
-          if (_this2._thumbheight) {
-            _this2._LGThumbs.style.height = _this2._thumbheight;
+          if (this._thumbheight) {
+            this._LGThumbs.style.height = this._thumbheight;
 
-            _this2._Slider.setAttribute('style', 'height: calc(100% - ' + _this2._margin + ' - ' + _this2._thumbheight + ') !important');
+            this._Slider.setAttribute('style', 'height: calc(100% - ' + this._margin + ' - ' + this._thumbheight + ') !important');
           }
         }
 
         ;
 
         if (document.body.clientWidth < 769) {
-          thumbsHeight = parseInt(getComputedStyle(_this2._LGThumbs).height);
+          thumbsHeight = parseInt(getComputedStyle(this._LGThumbs).height);
           if (thumbsHeight > 100) thumbsHeight = 100;
-          if (thumbsContWidth > _this2._parent.clientWidth) thumbsContWidth = _this2._parent.clientWidth;
+          if (thumbsContWidth > this._parent.clientWidth) thumbsContWidth = this._parent.clientWidth;
           if (thumbWidth > 150) thumbWidth = thumbsContWidth / 4;
 
-          for (var _i = 0; _i < thumbs.length; _i++) {
-            thumbs[_i].style.width = thumbWidth + 'px';
+          for (let i = 0; i < thumbs.length; i++) {
+            thumbs[i].style.width = thumbWidth + 'px';
           }
 
           ; // this._LGThumbs.style.width = thumbsContWidth + 'px';
 
-          _this2._LGThumbs.style.height = thumbsHeight + 'px';
+          this._LGThumbs.style.height = thumbsHeight + 'px';
 
-          _this2._Slider.setAttribute('style', 'height: calc(100% - ' + _this2._margin + ' - ' + thumbsHeight + 'px) !important');
+          this._Slider.setAttribute('style', 'height: calc(100% - ' + this._margin + ' - ' + thumbsHeight + 'px) !important');
         }
 
         ;
 
         if (document.body.clientWidth < 415) {
-          thumbsHeight = parseInt(getComputedStyle(_this2._LGThumbs).height);
+          thumbsHeight = parseInt(getComputedStyle(this._LGThumbs).height);
           if (thumbsHeight > 80) thumbsHeight = 80;
           if (thumbWidth > 100) thumbWidth = thumbsContWidth / 3;
 
-          for (var _i2 = 0; _i2 < thumbs.length; _i2++) {
-            thumbs[_i2].style.width = thumbWidth + 'px';
+          for (let i = 0; i < thumbs.length; i++) {
+            thumbs[i].style.width = thumbWidth + 'px';
           }
 
           ; // this._LGThumbs.style.width = thumbsContWidth + 'px';
 
-          _this2._LGThumbs.style.height = thumbsHeight + 'px';
+          this._LGThumbs.style.height = thumbsHeight + 'px';
 
-          _this2._Slider.setAttribute('style', 'height: calc(100% - ' + _this2._margin + ' - ' + thumbsHeight + 'px) !important');
+          this._Slider.setAttribute('style', 'height: calc(100% - ' + this._margin + ' - ' + thumbsHeight + 'px) !important');
         }
 
         ;
@@ -1075,33 +1068,33 @@
 
       distance = thumbsContWidth - thumbs.length * (thumbWidth + thumbMargin * 2); // Обработчик для регулировки прокрутки миниатюр при изменении разрешения экрана + адаптив
 
-      window.addEventListener('resize', function () {
+      window.addEventListener('resize', () => {
         adaptPreview(); // Соотношение для использовния далее
 
-        var ratio;
+        let ratio;
         if (thumbCoords == distance + thumbMargin * 2) ratio = 1; // Габариты превью и блока с ними
 
         thumbWidth = thumbWidth;
         thumbsContWidth = thumbsContWidth;
 
-        if (_this2._thumbcontainer) {
-          var _value2 = _this2._thumbcontainer.slice(-1);
+        if (this._thumbcontainer) {
+          let value = this._thumbcontainer.slice(-1);
 
-          switch (_value2) {
+          switch (value) {
             case 'x':
-              thumbsContWidth = +parseInt(_this2._thumbcontainer);
+              thumbsContWidth = +parseInt(this._thumbcontainer);
               break;
 
             case '%':
-              thumbsContWidth = _this2._parent.clientWidth * parseInt(_this2._thumbcontainer) / 100;
+              thumbsContWidth = this._parent.clientWidth * parseInt(this._thumbcontainer) / 100;
               break;
           }
         }
 
         ; // Правильно позиционируем и задаем ращмеры блоку превью при изменении размеров экрана
 
-        if (thumbsContWidth > _this2._parent.clientWidth) thumbsContWidth = _this2._parent.clientWidth;
-        _this2._LGThumbs.style.width = thumbsContWidth + 'px'; // Пересчитываем дистанцию
+        if (thumbsContWidth > this._parent.clientWidth) thumbsContWidth = this._parent.clientWidth;
+        this._LGThumbs.style.width = thumbsContWidth + 'px'; // Пересчитываем дистанцию
 
         distance = thumbsContWidth - thumbs.length * (thumbWidth + thumbMargin * 2); // Если активная превьюшака последняя - прокручиваем ее к новому краю экрана
 
@@ -1118,7 +1111,7 @@
 
     ; // Переменная текущего слайда для первого запуска слайдера
 
-    var currentSlide; // Устанавливаем ее значение в зависимости от дата-атрибута родителя: lgallery или lgparent
+    let currentSlide; // Устанавливаем ее значение в зависимости от дата-атрибута родителя: lgallery или lgparent
 
     if (this._type == 'lgallery' || this._type == 'lgslider' || this._type == 'lgpreview') {
       currentSlide = 0;
@@ -1133,21 +1126,21 @@
     ;
     slides[currentSlide].classList.add('LGallerySlider-Slide_showing'); // Объект координат для свайпа вправо/влево
 
-    var swipeStart = {},
+    let swipeStart = {},
         swipeEnd = {}; // Координаты для вычисления свайпа вверх/вниз
 
-    var shiftX, shiftY, initialY; // Сохранили контекст текущей галереи
+    let shiftX, shiftY, initialY; // Сохранили контекст текущей галереи
 
-    var self = this; // Переменные для очистки интервала автопереключения слайдеров и скокрости смены слайдов
+    let self = this; // Переменные для очистки интервала автопереключения слайдеров и скокрости смены слайдов
 
-    var autoPlayTimer,
+    let autoPlayTimer,
         autoPlayInterval = null;
     if (this._autoplay) autoPlayInterval = this._autoplay; // Fullscreen variables
 
-    var isFullscr; // Присвоили кнопки в переменные, чтобы сделать им анимацию при кликах и нажатиях
+    let isFullscr; // Присвоили кнопки в переменные, чтобы сделать им анимацию при кликах и нажатиях
 
-    var btnPrev = this._ButtonPrev;
-    var btnNext = this._ButtonNext; // Активировал функцию для обработки кликов по кнопка след/пред слайд
+    let btnPrev = this._ButtonPrev;
+    let btnNext = this._ButtonNext; // Активировал функцию для обработки кликов по кнопка след/пред слайд
 
     btnsClick.call(this); // ---------- СОБЫТИЯ ------------
     // События swipe
@@ -1203,7 +1196,7 @@
         self._Label.classList.add('LGallerySlider-Label_hidden'); // Для плавности анимации смены label делаем отложенное изменение текста и прозрачности
 
 
-        setTimeout(function () {
+        setTimeout(() => {
           // Сначала убираем предидущий текст (на тот случай, если у слайда нет текста и у него не показывался текст от предидущего)
           self._Label.textContent = ''; // Проверка: если есть значение (текст) - вставлем его. Если пропуск ('') - считаем, что это пустое место и пропускаем. Период анимации также зависит от atime
 
@@ -1218,7 +1211,7 @@
       ; // Label description (Функционал аналогичен для Label)
 
       if (self._descriptions) {
-        setTimeout(function () {
+        setTimeout(() => {
           self._LabelDescription.textContent = '';
 
           if (self._descriptions[currentSlide] != '' && self._descriptions[currentSlide] != undefined) {
@@ -1273,14 +1266,10 @@
       }; // Обработчики кликов по thumb для переключения слайда
 
 
-      var _loop = function _loop(i) {
+      for (let i = 0; i < thumbs.length; i++) {
         thumbs[i].onclick = function (e) {
           goToSlide(i);
         };
-      };
-
-      for (var i = 0; i < thumbs.length; i++) {
-        _loop(i);
       }
 
       ;
@@ -1321,8 +1310,8 @@
 
     function goToSlideOnKeyboard(e) {
       // Сравниваем координаты нашей галереи с верхней и нижней границей видимой области экрана
-      var visibleTop = self._parent.getBoundingClientRect().top >= -25;
-      var visibleBottom = self._parent.getBoundingClientRect().bottom <= document.documentElement.clientHeight + 25; // Для типов lgallery и lgparent - координаты верха и низа берем от самой галереи
+      let visibleTop = self._parent.getBoundingClientRect().top >= -25;
+      let visibleBottom = self._parent.getBoundingClientRect().bottom <= document.documentElement.clientHeight + 25; // Для типов lgallery и lgparent - координаты верха и низа берем от самой галереи
 
       if (self._type == 'lgallery' || self._type == 'lgparent') {
         visibleTop = self._Gallery.getBoundingClientRect().top >= -15;
@@ -1407,7 +1396,7 @@
     ; // Автопроигрывание для lgslider
 
     if (this._type == 'lgslider' && this._autoplay) {
-      var _autoPlayTimer = setInterval(function () {
+      let autoPlayTimer = setInterval(function () {
         goToSlide(currentSlide + 1);
       }, autoPlayInterval ? autoPlayInterval : 3000);
     }
@@ -1488,13 +1477,13 @@
 
       if (isFullscr) return; // Запоминаем цель клика для удобства
 
-      var target = e.target; // Убираем срабатывание перетаскивания при нажатии правой кнопкой, ctrl или command
+      let target = e.target; // Убираем срабатывание перетаскивания при нажатии правой кнопкой, ctrl или command
 
       if (e.metaKey || e.ctrlKey || e.which == 3) return; // Прерываем функцию если перетаскиваемый объект не слайд
 
       if (!target.classList.contains('LGallerySlider-Slide')) return; // Фиксируем первый клик для сравнения и утонения дистанции свайпа похже
 
-      var firstY = e.clientY; // Запоминаем сдвиг между координатой сверху цели и местом клика мышкой (чтобы не было резкого скачка при клике)
+      let firstY = e.clientY; // Запоминаем сдвиг между координатой сверху цели и местом клика мышкой (чтобы не было резкого скачка при клике)
 
       shiftY = e.clientY - target.getBoundingClientRect().top; // Устанавливаем новые координаты
 
@@ -1542,7 +1531,7 @@
       function moveAt(e) {
         // Drag & Drop вверх/вниз будет работать если протащили более 50 пикселей
         if (firstY - e.clientY > 50 || firstY - e.clientY < -50) {
-          var top = e.clientY - shiftY - 54.5 + target.clientHeight / 2;
+          let top = e.clientY - shiftY - 54.5 + target.clientHeight / 2;
           target.style.top = top + 'px';
         }
 
@@ -1579,10 +1568,10 @@
     function dragWhileSwipeOnMob(e) {
       // Если Fullscreen - прерывает функцию
       if (isFullscr) return;
-      var target = e.target;
+      let target = e.target;
       if (!target.classList.contains('LGallerySlider-Slide')) return; // Фиксируем первый клик для сравнения и утонения дистанции свайпа позже
 
-      var firstY = e.changedTouches[0].pageY;
+      let firstY = e.changedTouches[0].pageY;
       shiftY = e.changedTouches[0].pageY - target.getBoundingClientRect().top;
       moveAt(e);
       document.addEventListener('touchmove', touchMove);
@@ -1623,7 +1612,7 @@
       function moveAt(e) {
         // Drag & Drop вверх/вниз будет работать если протащили более 50 пикселей
         if (firstY - e.changedTouches[0].pageY > 50 || firstY - e.changedTouches[0].pageY < -50) {
-          var top = e.changedTouches[0].pageY - shiftY - 22.5 + target.clientHeight / 2;
+          let top = e.changedTouches[0].pageY - shiftY - 22.5 + target.clientHeight / 2;
           target.style.top = top + 'px';
         }
       }
@@ -1670,8 +1659,8 @@
     ; // Навешивает обработчики слежения за наведением на кнопки в режиме Fullscreen
 
     function hideBtnsInFullScr(e) {
-      var btns = [self._ButtonPrev, self._ButtonNext, self._Fullscreen, self._Play, self._Pause];
-      var timer, timerOnOpen;
+      let btns = [self._ButtonPrev, self._ButtonNext, self._Fullscreen, self._Play, self._Pause];
+      let timer, timerOnOpen;
       btns.forEach(function (item) {
         item.onmouseenter = function (e) {
           btns.forEach(function (item) {
@@ -1699,7 +1688,7 @@
     ; // Убирает обработчики слежения за наведением на кнопки в режиме Fullscreen
 
     function removeHideBtnsInFullScr(e) {
-      var btns = [self._ButtonPrev, self._ButtonNext, self._Fullscreen, self._Play, self._Pause];
+      let btns = [self._ButtonPrev, self._ButtonNext, self._Fullscreen, self._Play, self._Pause];
       btns.forEach(function (item) {
         item.classList.remove('LGallery_hiddenBtns');
         item.onmouseenter = null;
@@ -1709,8 +1698,6 @@
 
 
     function closeGallery() {
-      var _this3 = this;
-
       this._Gallery.classList.remove('LGallery_open');
 
       document.body.classList.remove('LGalleryBody_hidden');
@@ -1747,16 +1734,16 @@
       // Возвращаем эффекты transform при наведении на родителя
 
       if (this._type == 'lgallery' && this._hover) {
-        setTimeout(function () {
-          _this3._parent.setAttribute('style', _this3._initialStyle);
+        setTimeout(() => {
+          this._parent.setAttribute('style', this._initialStyle);
         }, 500);
       }
 
       ; // Кастомная опция объекта, при задании которой можно отменить/применить рендер галереи при каждом ее закрытии и открытии повторно. Стандартно - повторный рендер отключен. Если указан дата-атрибут lgrender, данная опция игнорируется
 
       if (this._render) {
-        setTimeout(function () {
-          if (_this3._parent.contains(_this3._Gallery)) _this3._parent.removeChild(_this3._Gallery);
+        setTimeout(() => {
+          if (this._parent.contains(this._Gallery)) this._parent.removeChild(this._Gallery);
         }, 300);
       }
 
@@ -1783,16 +1770,16 @@
     this._LGCaruselSliderInner.classList.add('LGCarusel-SliderInner');
 
     if (this._mod != 'custom') {
-      for (var i = 0; i < this._src.length; i++) {
-        var Slide = document.createElement('li');
+      for (let i = 0; i < this._src.length; i++) {
+        let Slide = document.createElement('li');
         Slide.classList.add('LGCarusel-Slide');
-        var picture = document.createElement('picture');
-        var img = document.createElement('img');
+        let picture = document.createElement('picture');
+        let img = document.createElement('img');
         img.src = this._src[i];
         img.alt = 'LGallery slide ' + i;
 
         if (this._mobilesrc) {
-          var source = document.createElement('source');
+          let source = document.createElement('source');
           source.media = '(max-width: ' + this._mobilesrc[0] + ')';
           source.srcset = this._mobilesrc[i + 1];
           picture.appendChild(source);
@@ -1801,11 +1788,10 @@
         ;
 
         if (this._tabletsrc) {
-          var _source2 = document.createElement('source');
-
-          _source2.media = '(max-width: ' + this._tabletsrc[0] + ')';
-          _source2.srcset = this._tabletsrc[i + 1];
-          picture.appendChild(_source2);
+          let source = document.createElement('source');
+          source.media = '(max-width: ' + this._tabletsrc[0] + ')';
+          source.srcset = this._tabletsrc[i + 1];
+          picture.appendChild(source);
         }
 
         ; // Убираем стандартное HTML drag & drop, чтобы не мешало нашему свайпу
@@ -1854,13 +1840,12 @@
     ;
 
     if (this._mod == 'custom') {
-      for (var _i3 = 0; _i3 < this._src.length; _i3++) {
-        var _Slide = this._src[_i3];
-        _i3--;
+      for (let i = 0; i < this._src.length; i++) {
+        let Slide = this._src[i];
+        i--;
+        Slide.classList.add('LGCarusel-Slide');
 
-        _Slide.classList.add('LGCarusel-Slide');
-
-        this._LGCaruselSliderInner.appendChild(_Slide);
+        this._LGCaruselSliderInner.appendChild(Slide);
       }
     } // Кнопка предыдуший слайд
 
@@ -1885,30 +1870,28 @@
   };
 
   LGallery.prototype._renderCaruselSlider = function () {
-    var _this4 = this;
-
     // Массив слайдов
-    var slides = this._parent.querySelectorAll('.LGCarusel-Slide'); // Кол-во пролистываний до переставления контейнера
+    let slides = this._parent.querySelectorAll('.LGCarusel-Slide'); // Кол-во пролистываний до переставления контейнера
 
 
-    var max = slides.length; // Basics
+    let max = slides.length; // Basics
 
-    var initialActiveSlides = 2;
+    let initialActiveSlides = 2;
     if (this._showslides) initialActiveSlides = this._showslides;
-    var initialSlidesPerSlide = 1;
+    let initialSlidesPerSlide = 1;
     if (this._slidesperclick) initialSlidesPerSlide = this._slidesperclick;
-    var initialMargin = 0;
+    let initialMargin = 0;
     if (this._slidesmargin) initialMargin = this._slidesmargin;
-    var initialSlideWidth = 500;
+    let initialSlideWidth = 500;
     if (this._slidewidth) initialSlideWidth = this._slidewidth; // Кол-во слайдов в активном окне
 
-    var activeSlides = initialActiveSlides; // Если по ошибке кол-во слайдов в активном окне указали менее или равным 0
+    let activeSlides = initialActiveSlides; // Если по ошибке кол-во слайдов в активном окне указали менее или равным 0
 
     if (slidesPerSlide <= 0) slidesPerSlide = 1; // Если по ошибке кол-во слайдов в активном окне указали более чем всего слайдов в слайдере
 
     if (activeSlides > max) activeSlides = max; // Кол-во слайдов для пролистывания (если их более 1)
 
-    var slidesPerSlide = initialSlidesPerSlide; // Если по ошибке кол-во слайдов для пролистывания указали менее или равным 0
+    let slidesPerSlide = initialSlidesPerSlide; // Если по ошибке кол-во слайдов для пролистывания указали менее или равным 0
 
     if (slidesPerSlide <= 0) slidesPerSlide = 1; // Если по ошибке кол-во слайдов для пролистывания указали более, чем кол-во слайдов в активном окне, приравнивает их
 
@@ -1920,18 +1903,18 @@
 
     ; // Текущая позиция слайдера в начале пролистывания
 
-    var currentPos = 0; // Ширина слайда
+    let currentPos = 0; // Ширина слайда
 
-    var slideWidth = initialSlideWidth; // Отступ между слайдами
+    let slideWidth = initialSlideWidth; // Отступ между слайдами
 
-    var margin = initialMargin; // Полная ширина слайда с учетом margin
+    let margin = initialMargin; // Полная ширина слайда с учетом margin
 
-    var slideFullWidth = slideWidth + margin * 2; // Меняем ширину контейнера в зависимости от ширины пролистывания. Полная ширина слайда * кол-во слайдов - отступы с 1-й стороны у крайних слайдов
+    let slideFullWidth = slideWidth + margin * 2; // Меняем ширину контейнера в зависимости от ширины пролистывания. Полная ширина слайда * кол-во слайдов - отступы с 1-й стороны у крайних слайдов
 
-    var LGCaruselSlider = slideFullWidth * activeSlides - margin * 2;
+    let LGCaruselSlider = slideFullWidth * activeSlides - margin * 2;
     this._LGCaruselSlider.style.width = LGCaruselSlider + 'px'; // Меняем ширину слайда в разметке в зависимости от указанной.
 
-    for (var i = 0; i < slides.length; i++) {
+    for (let i = 0; i < slides.length; i++) {
       slides[i].style.margin = '0 ' + margin + 'px';
       slides[i].style.width = slideWidth + 'px';
       slides[i].style.minWidth = slideWidth + 'px';
@@ -1939,8 +1922,8 @@
 
     ; // Клонируем слайды для иммитации бесконечного листания + убираем у них стандартный drag & drop
 
-    for (var _i4 = 1; _i4 <= max; _i4++) {
-      var copy = slides[slides.length - _i4].cloneNode(true);
+    for (let i = 1; i <= max; i++) {
+      let copy = slides[slides.length - i].cloneNode(true);
 
       copy.ondragstart = function () {
         return false;
@@ -1951,25 +1934,25 @@
 
     ;
 
-    for (var _i5 = 0; _i5 < max; _i5++) {
-      var _copy = slides[_i5].cloneNode(true);
+    for (let i = 0; i < max; i++) {
+      let copy = slides[i].cloneNode(true);
 
-      _copy.ondragstart = function () {
+      copy.ondragstart = function () {
         return false;
       };
 
-      this._LGCaruselSliderInner.append(_copy);
+      this._LGCaruselSliderInner.append(copy);
     }
 
     ; // Дистанция пролистывания слайда
 
-    var slideScroll = slideFullWidth * max; // Предварительно смещаем контейнер на 1 дистанцию пролистывания слайда - плюс margin с 1-й стороны
+    let slideScroll = slideFullWidth * max; // Предварительно смещаем контейнер на 1 дистанцию пролистывания слайда - плюс margin с 1-й стороны
 
     this._LGCaruselSliderInner.style.transform = 'translateX(-' + (slideScroll + margin) + 'px)'; // Переменная смещения границы контейнера
 
-    var containerMargin = 0; // Адаптив
+    let containerMargin = 0; // Адаптив
 
-    var adaptCarusel = function adaptCarusel() {
+    let adaptCarusel = () => {
       if (document.body.clientWidth > 1170) {
         activeSlides = initialActiveSlides;
         if (activeSlides > max) activeSlides = max;
@@ -1982,9 +1965,9 @@
 
         ;
         margin = initialMargin;
-        var parentPadding = parseInt(getComputedStyle(_this4._LGCarusel.parentNode).paddingLeft) * 2;
-        slideWidth = _this4._LGCarusel.parentNode.clientWidth / activeSlides - initialMargin * 2 - parentPadding / activeSlides;
-        if (_this4._LGCarusel.parentNode.clientWidth / activeSlides - margin > initialSlideWidth) slideWidth = initialSlideWidth;
+        let parentPadding = parseInt(getComputedStyle(this._LGCarusel.parentNode).paddingLeft) * 2;
+        slideWidth = this._LGCarusel.parentNode.clientWidth / activeSlides - initialMargin * 2 - parentPadding / activeSlides;
+        if (this._LGCarusel.parentNode.clientWidth / activeSlides - margin > initialSlideWidth) slideWidth = initialSlideWidth;
         slideFullWidth = slideWidth + margin * 2;
         LGCaruselSlider = slideFullWidth * activeSlides - margin * 2;
         slideScroll = slideFullWidth * max;
@@ -2006,10 +1989,8 @@
 
         ;
         margin = initialMargin / 1.68;
-
-        var _parentPadding = parseInt(getComputedStyle(_this4._LGCarusel.parentNode).paddingLeft) * 2;
-
-        slideWidth = _this4._LGCarusel.parentNode.clientWidth / activeSlides - initialMargin - _parentPadding / activeSlides;
+        let parentPadding = parseInt(getComputedStyle(this._LGCarusel.parentNode).paddingLeft) * 2;
+        slideWidth = this._LGCarusel.parentNode.clientWidth / activeSlides - initialMargin - parentPadding / activeSlides;
         slideFullWidth = slideWidth + margin * 2;
         LGCaruselSlider = slideFullWidth * activeSlides - margin * 2;
         slideScroll = slideFullWidth * max;
@@ -2030,10 +2011,8 @@
 
         ;
         margin = initialMargin / 3;
-
-        var _parentPadding2 = parseInt(getComputedStyle(_this4._LGCarusel.parentNode).paddingLeft) * 2;
-
-        slideWidth = (_this4._LGCarusel.parentNode.clientWidth - initialMargin) / activeSlides - _parentPadding2 / activeSlides;
+        let parentPadding = parseInt(getComputedStyle(this._LGCarusel.parentNode).paddingLeft) * 2;
+        slideWidth = (this._LGCarusel.parentNode.clientWidth - initialMargin) / activeSlides - parentPadding / activeSlides;
         slideFullWidth = slideWidth + margin * 2;
         LGCaruselSlider = slideFullWidth * activeSlides - margin * 2;
         slideScroll = slideFullWidth * max;
@@ -2047,9 +2026,8 @@
         slidesPerSlide = 1;
         margin = initialMargin / 4; // if (margin < 10) margin = 10;
 
-        var _parentPadding3 = parseInt(getComputedStyle(_this4._LGCarusel.parentNode).paddingLeft) * 2;
-
-        slideWidth = _this4._LGCarusel.parentNode.clientWidth - _parentPadding3 / activeSlides;
+        let parentPadding = parseInt(getComputedStyle(this._LGCarusel.parentNode).paddingLeft) * 2;
+        slideWidth = this._LGCarusel.parentNode.clientWidth - parentPadding / activeSlides;
         slideFullWidth = slideWidth + margin * 2;
         LGCaruselSlider = slideFullWidth * activeSlides - margin * 2;
         slideScroll = slideFullWidth * max;
@@ -2058,24 +2036,24 @@
 
       ;
       containerMargin = 0;
-      _this4._LGCaruselSlider.style.width = LGCaruselSlider + 'px';
+      this._LGCaruselSlider.style.width = LGCaruselSlider + 'px';
 
-      var newslides = _this4._parent.querySelectorAll('.LGCarusel-Slide');
+      let newslides = this._parent.querySelectorAll('.LGCarusel-Slide');
 
-      for (var _i6 = 0; _i6 < newslides.length; _i6++) {
-        newslides[_i6].style.margin = '0 ' + margin + 'px';
-        newslides[_i6].style.width = slideWidth + 'px';
-        newslides[_i6].style.minWidth = slideWidth + 'px';
+      for (let i = 0; i < newslides.length; i++) {
+        newslides[i].style.margin = '0 ' + margin + 'px';
+        newslides[i].style.width = slideWidth + 'px';
+        newslides[i].style.minWidth = slideWidth + 'px';
       }
 
       ;
-      _this4._LGCaruselSliderInner.style.transform = 'translateX(-' + (slideScroll + margin) + 'px)';
-      _this4._LGCaruselSliderInner.style.marginLeft = containerMargin + 'px';
+      this._LGCaruselSliderInner.style.transform = 'translateX(-' + (slideScroll + margin) + 'px)';
+      this._LGCaruselSliderInner.style.marginLeft = containerMargin + 'px';
     };
 
     adaptCarusel(); // Обаработчик на изменения окна браузера, для пересчета габаритов слайдера
 
-    var onDocResize = function onDocResize() {
+    let onDocResize = () => {
       adaptCarusel();
     }; // Для ПК ставим обработчик на изменеие окна браузера. Для тачскринов - на изменение ориентации, по той причине, что иногда свайпай пальцем может появиться строка браузера, которая все время то скрывается, то появляется в мобильных браузерах из-за чего текущий соайд сбрасывается до первого. Нивелируем это действие
 
@@ -2089,55 +2067,55 @@
 
     ; // Обработчики кликов вперед/назад по кнопкам
 
-    var nextSlide = function nextSlide() {
+    let nextSlide = () => {
       slideScroll += slideFullWidth * slidesPerSlide;
-      _this4._LGCaruselSliderInner.style.transform = 'translateX(' + (-slideScroll - margin) + 'px)'; // Увеличиваем счетчик текущего слайда
+      this._LGCaruselSliderInner.style.transform = 'translateX(' + (-slideScroll - margin) + 'px)'; // Увеличиваем счетчик текущего слайда
 
       currentPos = currentPos + slidesPerSlide; // Если продвигали сладйы на расстояние общего кол-ва слайдов - пора перемещать контейнер
 
       if (currentPos >= max) {
         // Сдвигаем контейнер на кол-во слайдов * ширину каждого
         containerMargin += slideFullWidth * slides.length;
-        _this4._LGCaruselSliderInner.style.marginLeft = containerMargin + 'px'; // Сбрасываем счетчик текущего слайда до первого слайда
+        this._LGCaruselSliderInner.style.marginLeft = containerMargin + 'px'; // Сбрасываем счетчик текущего слайда до первого слайда
 
         currentPos = 0;
       } // Анимация при прокрутке
 
 
-      _this4._LGCaruselSliderInner.classList.add('LGCarusel-SliderInner_sliding');
+      this._LGCaruselSliderInner.classList.add('LGCarusel-SliderInner_sliding');
 
-      setTimeout(function () {
-        _this4._LGCaruselSliderInner.classList.remove('LGCarusel-SliderInner_sliding');
+      setTimeout(() => {
+        this._LGCaruselSliderInner.classList.remove('LGCarusel-SliderInner_sliding');
       }, 500);
     };
 
-    var prevSlide = function prevSlide() {
+    let prevSlide = () => {
       slideScroll -= slideFullWidth * slidesPerSlide;
-      _this4._LGCaruselSliderInner.style.transform = 'translateX(' + (-slideScroll - margin) + 'px)'; // Уменьшаем счетчик текущего слайда
+      this._LGCaruselSliderInner.style.transform = 'translateX(' + (-slideScroll - margin) + 'px)'; // Уменьшаем счетчик текущего слайда
 
       currentPos = currentPos - slidesPerSlide; // Если продвигали сладйы на расстояние общего кол-ва слайдов - пора перемещать контейнер
 
       if (currentPos <= -max) {
         // Сдвигаем контейнер на кол-во слайдов * ширину каждого
         containerMargin -= slideFullWidth * slides.length;
-        _this4._LGCaruselSliderInner.style.marginLeft = containerMargin + 'px'; // Сбрасываем счетчик текущего слайда до последнего слайда
+        this._LGCaruselSliderInner.style.marginLeft = containerMargin + 'px'; // Сбрасываем счетчик текущего слайда до последнего слайда
 
         currentPos = 0;
       } // Анимация при прокрутке
 
 
-      _this4._LGCaruselSliderInner.classList.add('LGCarusel-SliderInner_sliding');
+      this._LGCaruselSliderInner.classList.add('LGCarusel-SliderInner_sliding');
 
-      setTimeout(function () {
-        _this4._LGCaruselSliderInner.classList.remove('LGCarusel-SliderInner_sliding');
+      setTimeout(() => {
+        this._LGCaruselSliderInner.classList.remove('LGCarusel-SliderInner_sliding');
       }, 500);
     }; // Анимация при клике по кнопкам вперед/назад
 
 
-    var animateButton = function animateButton(btn) {
-      if (_this4._options.nobtns) return;
+    let animateButton = btn => {
+      if (this._options.nobtns) return;
 
-      if (_this4._parent.dataset.lgnobtns == undefined) {
+      if (this._parent.dataset.lgnobtns == undefined) {
         btn.classList.add('LGCarusel-Button_clicked');
         setTimeout(function () {
           btn.classList.remove('LGCarusel-Button_clicked');
@@ -2148,20 +2126,20 @@
     }; // Обработчик кликов по кнопке вперед
 
 
-    this._LGCaruselButtonNext.onclick = function (e) {
+    this._LGCaruselButtonNext.onclick = e => {
       nextSlide();
-      animateButton(_this4._LGCaruselButtonNext);
+      animateButton(this._LGCaruselButtonNext);
     }; // Обработчик кликов по кнопке назад
 
 
-    this._LGCaruselButtonPrev.onclick = function (e) {
+    this._LGCaruselButtonPrev.onclick = e => {
       prevSlide();
-      animateButton(_this4._LGCaruselButtonPrev);
+      animateButton(this._LGCaruselButtonPrev);
     }; // Autoplay
     // Переменные для очистки интервала автопереключения слайдеров и скокрости смены слайдов
 
 
-    var autoPlayTimer,
+    let autoPlayTimer,
         autoPlayInterval = null;
     if (this._autoplay) autoPlayInterval = this._autoplay; // Автопроигрывание для lgslider
 
@@ -2173,12 +2151,12 @@
 
     ; // Обработчик прерывания автопроигрывания при наведении мышки на карусель
 
-    this._LGCarusel.addEventListener('mouseenter', function () {
+    this._LGCarusel.addEventListener('mouseenter', () => {
       clearInterval(autoPlayTimer);
     });
 
-    this._LGCarusel.addEventListener('mouseleave', function () {
-      if (_this4._autoplay) {
+    this._LGCarusel.addEventListener('mouseleave', () => {
+      if (this._autoplay) {
         autoPlayTimer = setInterval(function () {
           nextSlide();
         }, autoPlayInterval ? autoPlayInterval : 3000);
@@ -2189,16 +2167,16 @@
     // Обработчик переключения слайдов клавиатурой
 
 
-    var changeSlideOnKeyboard = function changeSlideOnKeyboard(e) {
+    let changeSlideOnKeyboard = e => {
       // Сравниваем координаты нашей галереи с верхней и нижней границей видимой области экрана
-      var visibleTop = _this4._parent.getBoundingClientRect().top >= -25;
-      var visibleBottom = _this4._parent.getBoundingClientRect().bottom <= document.documentElement.clientHeight + 25;
+      let visibleTop = this._parent.getBoundingClientRect().top >= -25;
+      let visibleBottom = this._parent.getBoundingClientRect().bottom <= document.documentElement.clientHeight + 25;
 
       if (e.keyCode == 37) {
         // Проверка: если в видимой области - листаем
         if (visibleTop && visibleBottom) {
           prevSlide();
-          animateButton(_this4._LGCaruselButtonPrev);
+          animateButton(this._LGCaruselButtonPrev);
         }
 
         ; // Убираем стандартное поведение браузера при клике по кнопкам
@@ -2212,7 +2190,7 @@
         // Проверка: если в видимой области - листаем
         if (visibleTop && visibleBottom) {
           nextSlide();
-          animateButton(_this4._LGCaruselButtonNext);
+          animateButton(this._LGCaruselButtonNext);
         } // Убираем стандартное поведение браузера при клике по кнопкам
 
 
@@ -2226,7 +2204,7 @@
     document.addEventListener('keydown', changeSlideOnKeyboard); // SWIPE
     // Переменные для записи координат для свайпов
 
-    var swipeStart = {},
+    let swipeStart = {},
         swipeEnd = {}; // Обработчики свайпов на ПК и тачскринах
 
     this._LGCarusel.addEventListener('mousedown', swipeStartOnDoc);
@@ -2238,7 +2216,7 @@
     this._LGCarusel.addEventListener('touchend', swipeEndOnMob); // Функция переключения слайдов при свайпе
 
 
-    var swipe = function swipe() {
+    let swipe = () => {
       if (swipeEnd.x - swipeStart.x < -100) {
         nextSlide();
       }
@@ -2304,7 +2282,7 @@
 
   window.createLG = function (elem, options) {
     // Создаем новый объект и создаем ему свойство parent со значением elem
-    var opt = {};
+    let opt = {};
     opt.parent = elem; // // Копируем остальные свойства (если они есть) из стандартного объекта опций
     // for (let key in LGallery.prototype._option) {
     //   opt[key] = LGallery.prototype._option[key]
@@ -2312,7 +2290,7 @@
     // Если в качестве аргумента передан объект опций, копируем свойства и из него
 
     if (options) {
-      for (var key in options) {
+      for (let key in options) {
         opt[key] = options[key];
       }
 
@@ -2321,7 +2299,7 @@
 
     ; // Доп. проверка на наличие галлерей
 
-    var check = elem.querySelectorAll('.LGallery');
+    let check = elem.querySelectorAll('.LGallery');
     if (check.length) return; // Создаем и возвращаем (чтобы можно было с ним работать при необходимости) новый объект галереи
 
     return new LGallery(opt);
@@ -2330,81 +2308,69 @@
 
   window.initLG = function () {
     // Создаем пустой масив для записи галерей
-    var arr = []; // Ищем в документе все элементы с data-lgallery
+    let arr = []; // Ищем в документе все элементы с data-lgallery
 
-    var all = document.querySelectorAll('[data-lgallery]'); // Создаем с каждым из них новый объект галереи со стандартным объктом опций. Каждый из них записываем в созданый ранее массив
+    let all = document.querySelectorAll('[data-lgallery]'); // Создаем с каждым из них новый объект галереи со стандартным объктом опций. Каждый из них записываем в созданый ранее массив
 
-    for (var i = 0; i < all.length; i++) {
+    for (let i = 0; i < all.length; i++) {
       LGallery.prototype._lgalleryoption.parent = all[i]; // Доп. проверка на наличие галлерей
 
-      var check = all[i].querySelectorAll('.LGallery');
+      let check = all[i].querySelectorAll('.LGallery');
       if (check.length) return;
-      var gal = new LGallery(LGallery.prototype._lgalleryoption);
+      let gal = new LGallery(LGallery.prototype._lgalleryoption);
       arr.push(gal);
     }
 
     ; // Аналогично но с data-lgparent
 
-    var allParent = document.querySelectorAll('[data-lgparent]');
+    let allParent = document.querySelectorAll('[data-lgparent]');
 
-    for (var _i7 = 0; _i7 < allParent.length; _i7++) {
-      LGallery.prototype._lgparentoption.parent = allParent[_i7]; // Доп. проверка на наличие галлерей
+    for (let i = 0; i < allParent.length; i++) {
+      LGallery.prototype._lgparentoption.parent = allParent[i]; // Доп. проверка на наличие галлерей
 
-      var _check = allParent[_i7].querySelectorAll('.LGallery');
-
-      if (_check.length) return;
-
-      var _gal = new LGallery(LGallery.prototype._lgparentoption);
-
-      arr.push(_gal);
+      let check = allParent[i].querySelectorAll('.LGallery');
+      if (check.length) return;
+      let gal = new LGallery(LGallery.prototype._lgparentoption);
+      arr.push(gal);
     }
 
     ; // Аналогично но с data-lgslider
 
-    var allSlider = document.querySelectorAll('[data-lgslider]');
+    let allSlider = document.querySelectorAll('[data-lgslider]');
 
-    for (var _i8 = 0; _i8 < allSlider.length; _i8++) {
-      LGallery.prototype._lgslideroption.parent = allSlider[_i8]; // Доп. проверка на наличие галлерей
+    for (let i = 0; i < allSlider.length; i++) {
+      LGallery.prototype._lgslideroption.parent = allSlider[i]; // Доп. проверка на наличие галлерей
 
-      var _check2 = allSlider[_i8].querySelectorAll('.LGallerySlider');
-
-      if (_check2.length) return;
-
-      var _gal2 = new LGallery(LGallery.prototype._lgslideroption);
-
-      arr.push(_gal2);
+      let check = allSlider[i].querySelectorAll('.LGallerySlider');
+      if (check.length) return;
+      let gal = new LGallery(LGallery.prototype._lgslideroption);
+      arr.push(gal);
     }
 
     ; // Аналогично но с data-lgpreview
 
-    var allPreview = document.querySelectorAll('[data-lgpreview]');
+    let allPreview = document.querySelectorAll('[data-lgpreview]');
 
-    for (var _i9 = 0; _i9 < allPreview.length; _i9++) {
-      LGallery.prototype._lgpreviewoption.parent = allPreview[_i9]; // Доп. проверка на наличие галлерей
+    for (let i = 0; i < allPreview.length; i++) {
+      LGallery.prototype._lgpreviewoption.parent = allPreview[i]; // Доп. проверка на наличие галлерей
 
-      var _check3 = allPreview[_i9].querySelectorAll('.LGallerySlider');
-
-      if (_check3.length) return;
-
-      var _gal3 = new LGallery(LGallery.prototype._lgpreviewoption);
-
-      arr.push(_gal3);
+      let check = allPreview[i].querySelectorAll('.LGallerySlider');
+      if (check.length) return;
+      let gal = new LGallery(LGallery.prototype._lgpreviewoption);
+      arr.push(gal);
     }
 
     ; // Аналогично но с data-lgcarusel
 
-    var allCarusel = document.querySelectorAll('[data-lgcarusel]');
+    let allCarusel = document.querySelectorAll('[data-lgcarusel]');
 
-    for (var _i10 = 0; _i10 < allCarusel.length; _i10++) {
-      LGallery.prototype._lgcaruseloption.parent = allCarusel[_i10]; // Доп. проверка на наличие галлерей
+    for (let i = 0; i < allCarusel.length; i++) {
+      LGallery.prototype._lgcaruseloption.parent = allCarusel[i]; // Доп. проверка на наличие галлерей
 
-      var _check4 = allCarusel[_i10].querySelectorAll('.LGallery');
-
-      if (_check4.length) return;
-
-      var _gal4 = new LGallery(LGallery.prototype._lgcaruseloption);
-
-      arr.push(_gal4);
+      let check = allCarusel[i].querySelectorAll('.LGallery');
+      if (check.length) return;
+      let gal = new LGallery(LGallery.prototype._lgcaruseloption);
+      arr.push(gal);
     }
 
     ; // Возвращаем масив для работы с ним
